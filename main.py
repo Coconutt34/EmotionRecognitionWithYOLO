@@ -125,13 +125,11 @@ class VideoStreamApp(QMainWindow, QWidget):
         global file_path
         file_path, _ = QFileDialog.getOpenFileName(self, "Выберите видео файл", "",
                                                    "Видео файлы (*.mp4 *.avi *.mov);;Все файлы (*)", options=options)
-        change_the_main_text(1, file_path, self)
-
+        if file_path:
+            change_the_main_text(1, file_path, self)
+            self.ui.textBrowser.mousePressEvent = self.on_label_click_video
         #if file_path:
-         #   QMessageBox.information(self, "Выбранный файл", f"Вы выбрали файл: {file_path}")
-        print(self.ui.textBrowser.mousePressEvent)
-        self.ui.textBrowser.mousePressEvent = self.on_label_click_video
-
+        #   QMessageBox.information(self, "Выбранный файл", f"Вы выбрали файл: {file_path}")
 
     def on_label_click_video(self, event):
         video_process(file_path)
